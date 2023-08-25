@@ -8,6 +8,7 @@ import org.junit.Test;
 import java.util.List;
 
 public class JsonTest {
+
     int posts = 100;
     int comments = 500;
     int albums = 100;
