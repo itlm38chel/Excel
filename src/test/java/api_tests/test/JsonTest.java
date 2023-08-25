@@ -2,6 +2,7 @@ package api_tests.test;
 
 import api_tests.actions.JsonPlaceholder;
 import com.fasterxml.jackson.core.JsonProcessingException;
+import lombok.Data;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -18,7 +19,7 @@ public class JsonTest {
 
     @Test
     public void posts() throws JsonProcessingException {
-        List<JsonPlaceholder.PostClass> obj = jsonplaceholder.posts(url);
+        List<PostClass> obj = jsonplaceholder.posts(url);
         for (int i = 0; i < obj.size(); i++) {
             Assert.assertNotNull(obj.get(i).getUserId());
             Assert.assertNotNull(obj.get(i).getId());
@@ -30,7 +31,7 @@ public class JsonTest {
 
     @Test
     public void comments() throws JsonProcessingException {
-        List<JsonPlaceholder.CommentClass> obj = jsonplaceholder.comments(url);
+        List<CommentClass> obj = jsonplaceholder.comments(url);
         for (int i = 0; i < obj.size(); i++) {
             Assert.assertNotNull(obj.get(i).getPostId());
             Assert.assertNotNull(obj.get(i).getId());
@@ -43,7 +44,7 @@ public class JsonTest {
 
     @Test
     public void albums() throws JsonProcessingException {
-        List<JsonPlaceholder.AlbumClass> obj = jsonplaceholder.albums(url);
+        List<AlbumClass> obj = jsonplaceholder.albums(url);
         for (int i = 0; i < obj.size(); i++) {
             Assert.assertNotNull(obj.get(i).getUserId());
             Assert.assertNotNull(obj.get(i).getId());
@@ -54,7 +55,7 @@ public class JsonTest {
 
     @Test
     public void photos() throws JsonProcessingException {
-        List<JsonPlaceholder.PhotoClass> obj = jsonplaceholder.photos(url);
+        List<PhotoClass> obj = jsonplaceholder.photos(url);
         for (int i = 0; i < obj.size(); i++) {
             Assert.assertNotNull(obj.get(i).getAlbumId());
             Assert.assertNotNull(obj.get(i).getId());
@@ -65,4 +66,33 @@ public class JsonTest {
         Assert.assertEquals(obj.size(), photos);
     }
 
+    @Data
+    public static class PostClass {
+        private Integer userId;
+        private Integer id;
+        private String title;
+        private String body;
+    }
+    @Data
+    public static class CommentClass {
+        private Integer postId;
+        private Integer id;
+        private String name;
+        private String email;
+        private String body;
+    }
+    @Data
+    public static class AlbumClass {
+        private Integer userId;
+        private Integer id;
+        private String title;
+    }
+    @Data
+    public static class PhotoClass {
+        private Integer albumId;
+        private Integer id;
+        private String title;
+        private String url;
+        private String thumbnailUrl;
+    }
 }
