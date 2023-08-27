@@ -1,5 +1,6 @@
 package api_tests.actions;
 
+import api_tests.pojo.Post;
 import api_tests.test.JsonTest;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -11,7 +12,7 @@ import static io.restassured.RestAssured.given;
 public class JsonPlaceholder {
 
 
-    public List<JsonTest.PostClass> posts(String url) throws JsonProcessingException {
+    public List<Post> posts(String url) throws JsonProcessingException {
         String response = given()
                 .baseUri(url)
                 .basePath("/posts")
@@ -21,7 +22,7 @@ public class JsonPlaceholder {
                 .extract()
                 .response().asString();
         ObjectMapper objectMapper = new ObjectMapper();
-        List<JsonTest.PostClass> JsonPost = objectMapper.readValue(response, objectMapper.getTypeFactory().constructParametricType(List.class, JsonTest.PostClass.class));
+        List<Post> JsonPost = objectMapper.readValue(response, objectMapper.getTypeFactory().constructParametricType(List.class, Post.class));
         return JsonPost;
     }
 

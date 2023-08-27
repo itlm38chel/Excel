@@ -1,5 +1,6 @@
 package api_tests.trash;
 
+import api_tests.pojo.Post;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -8,6 +9,8 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import java.util.List;
+
+import static io.restassured.RestAssured.given;
 
 public class GetListFromJson {
     @Data
@@ -36,6 +39,21 @@ public class GetListFromJson {
         }
         Assert.assertEquals(listCar.size(),3);
         System.out.println(listCar.size());
+    }
+@Test
+    public void posts() throws JsonProcessingException {
+        String response = given()
+                .baseUri("https://jsonplaceholder.typicode.com")
+                .basePath("/posts")
+                .when()
+                .get()
+                .then()
+                .extract()
+                .response().asString();
+        ObjectMapper objectMapper = new ObjectMapper();
+        List<Post> JsonPost = objectMapper.readValue(response, List.class);
+        System.out.println(JsonPost);
+   //     return JsonPost;
     }
 
 }
