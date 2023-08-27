@@ -54,8 +54,8 @@ public class JsonPlaceholder {
                 .response().asString();
         ObjectMapper objectMapper = new ObjectMapper();
         JavaType album = objectMapper.getTypeFactory().constructParametricType(List.class, Album.class);
-        List<Album> JsonComment = objectMapper.readValue(response, album);
-        return (JsonComment);
+        List<Album> JsonAlbum = objectMapper.readValue(response, album);
+        return (JsonAlbum);
     }
 
     public List<Photo> photos(String url) throws JsonProcessingException {
@@ -69,8 +69,8 @@ public class JsonPlaceholder {
                 .response().asString();
         ObjectMapper objectMapper = new ObjectMapper();
         JavaType photo = objectMapper.getTypeFactory().constructParametricType(List.class, Photo.class);
-        List<Photo> JsonComment = objectMapper.readValue(response, photo);
-        return (JsonComment);
+        List<Photo> JsonPhoto = objectMapper.readValue(response, photo);
+        return (JsonPhoto);
     }
 
 }
