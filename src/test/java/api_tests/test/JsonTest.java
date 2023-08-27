@@ -1,6 +1,7 @@
 package api_tests.test;
 
 import api_tests.actions.JsonPlaceholder;
+import api_tests.pojo.Post;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import lombok.Data;
 import org.junit.Assert;
@@ -18,8 +19,8 @@ public class JsonTest {
     JsonPlaceholder jsonplaceholder = new JsonPlaceholder();
 
     @Test
-    public void posts() throws JsonProcessingException {
-        List<PostClass> obj = jsonplaceholder.posts(url);
+    public void posts() throws JsonProcessingException, NoSuchFieldException {
+        List<Post> obj = jsonplaceholder.posts(url);
         for (int i = 0; i < obj.size(); i++) {
             Assert.assertNotNull(obj.get(i).getUserId());
             Assert.assertNotNull(obj.get(i).getId());
@@ -67,13 +68,6 @@ public class JsonTest {
     }
 
     @Data
-    public static class PostClass {
-        private Integer userId;
-        private Integer id;
-        private String title;
-        private String body;
-    }
-    @Data
     public static class CommentClass {
         private Integer postId;
         private Integer id;
@@ -81,12 +75,14 @@ public class JsonTest {
         private String email;
         private String body;
     }
+
     @Data
     public static class AlbumClass {
         private Integer userId;
         private Integer id;
         private String title;
     }
+
     @Data
     public static class PhotoClass {
         private Integer albumId;
