@@ -23,8 +23,8 @@ public class JsonPlaceholder {
                 .extract()
                 .response().asString();
         ObjectMapper objectMapper = new ObjectMapper();
-        JavaType post = objectMapper.getTypeFactory().constructParametricType(List.class, Post.class);
-        List<Post> JsonPost = objectMapper.readValue(response, post);
+        JavaType Post = objectMapper.getTypeFactory().constructParametricType(List.class, Post.class);
+        List<Post> JsonPost = objectMapper.readValue(response, Post);
         return JsonPost;
     }
 
@@ -38,8 +38,8 @@ public class JsonPlaceholder {
                 .extract()
                 .response().asString();
         ObjectMapper objectMapper = new ObjectMapper();
-        JavaType comment = objectMapper.getTypeFactory().constructParametricType(List.class, Comment.class);
-        List<Comment> JsonComment = objectMapper.readValue(response, comment);
+        JavaType Comment = objectMapper.getTypeFactory().constructParametricType(List.class, Comment.class);
+        List<Comment> JsonComment = objectMapper.readValue(response, Comment);
         return JsonComment;
     }
 
@@ -53,9 +53,9 @@ public class JsonPlaceholder {
                 .extract()
                 .response().asString();
         ObjectMapper objectMapper = new ObjectMapper();
-        JavaType album = objectMapper.getTypeFactory().constructParametricType(List.class, Album.class);
-        List<Album> JsonComment = objectMapper.readValue(response, album);
-        return (JsonComment);
+        JavaType Album = objectMapper.getTypeFactory().constructParametricType(List.class, Album.class);
+        List<Album> JsonAlbum = objectMapper.readValue(response, Album);
+        return (JsonAlbum);
     }
 
     public List<Photo> photos(String url) throws JsonProcessingException {
@@ -68,9 +68,9 @@ public class JsonPlaceholder {
                 .extract()
                 .response().asString();
         ObjectMapper objectMapper = new ObjectMapper();
-        JavaType photo = objectMapper.getTypeFactory().constructParametricType(List.class, Photo.class);
-        List<Photo> JsonComment = objectMapper.readValue(response, photo);
-        return (JsonComment);
+        JavaType Photo = objectMapper.getTypeFactory().constructParametricType(List.class, Photo.class);
+        List<Photo> JsonPhoto = objectMapper.readValue(response, Photo);
+        return (JsonPhoto);
     }
 
 }
