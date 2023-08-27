@@ -1,8 +1,11 @@
 package api_tests.actions;
 
+import api_tests.pojo.Album;
+import api_tests.pojo.Comment;
+import api_tests.pojo.Photo;
 import api_tests.pojo.Post;
-import api_tests.test.JsonTest;
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JavaType;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.util.List;
@@ -20,11 +23,12 @@ public class JsonPlaceholder {
                 .extract()
                 .response().asString();
         ObjectMapper objectMapper = new ObjectMapper();
-        List<Post> JsonPost = objectMapper.readValue(response, objectMapper.getTypeFactory().constructParametricType(List.class, Post.class));
+        JavaType post = objectMapper.getTypeFactory().constructParametricType(List.class, Post.class);
+        List<Post> JsonPost = objectMapper.readValue(response, post);
         return JsonPost;
     }
 
-    public List<JsonTest.CommentClass> comments(String url) throws JsonProcessingException {
+    public List<Comment> comments(String url) throws JsonProcessingException {
         String response = given()
                 .baseUri(url)
                 .basePath("/comments")
@@ -34,11 +38,12 @@ public class JsonPlaceholder {
                 .extract()
                 .response().asString();
         ObjectMapper objectMapper = new ObjectMapper();
-        List<JsonTest.CommentClass> JsonComment = objectMapper.readValue(response, objectMapper.getTypeFactory().constructParametricType(List.class, JsonTest.CommentClass.class));
-        return (JsonComment);
+        JavaType comment = objectMapper.getTypeFactory().constructParametricType(List.class, Comment.class);
+        List<Comment> JsonComment = objectMapper.readValue(response, comment);
+        return JsonComment;
     }
 
-    public List<JsonTest.AlbumClass> albums(String url) throws JsonProcessingException {
+    public List<Album> albums(String url) throws JsonProcessingException {
         String response = given()
                 .baseUri(url)
                 .basePath("/albums")
@@ -48,11 +53,12 @@ public class JsonPlaceholder {
                 .extract()
                 .response().asString();
         ObjectMapper objectMapper = new ObjectMapper();
-        List<JsonTest.AlbumClass> JsonComment = objectMapper.readValue(response, objectMapper.getTypeFactory().constructParametricType(List.class, JsonTest.AlbumClass.class));
+        JavaType album = objectMapper.getTypeFactory().constructParametricType(List.class, Album.class);
+        List<Album> JsonComment = objectMapper.readValue(response, album);
         return (JsonComment);
     }
 
-    public List<JsonTest.PhotoClass> photos(String url) throws JsonProcessingException {
+    public List<Photo> photos(String url) throws JsonProcessingException {
         String response = given()
                 .baseUri(url)
                 .basePath("/photos")
@@ -62,7 +68,8 @@ public class JsonPlaceholder {
                 .extract()
                 .response().asString();
         ObjectMapper objectMapper = new ObjectMapper();
-        List<JsonTest.PhotoClass> JsonComment = objectMapper.readValue(response, objectMapper.getTypeFactory().constructParametricType(List.class, JsonTest.PhotoClass.class));
+        JavaType photo = objectMapper.getTypeFactory().constructParametricType(List.class, Photo.class);
+        List<Photo> JsonComment = objectMapper.readValue(response, photo);
         return (JsonComment);
     }
 
