@@ -20,7 +20,7 @@ public class JsonPlaceholder {
                 .extract()
                 .response().asString();
         ObjectMapper objectMapper = new ObjectMapper();
-        List<Post> JsonPost = objectMapper.readValue(response, List.class);
+        List<Post> JsonPost = objectMapper.readValue(response, objectMapper.getTypeFactory().constructParametricType(List.class, Post.class));
         return JsonPost;
     }
 

@@ -19,9 +19,14 @@ public class JsonTest {
     JsonPlaceholder jsonplaceholder = new JsonPlaceholder();
 
     @Test
-    public void posts() throws JsonProcessingException {
+    public void posts() throws JsonProcessingException, NoSuchFieldException {
         List<Post> obj = jsonplaceholder.posts(url);
-        System.out.println(obj.get(1).getId());
+        for (int i = 0; i < obj.size(); i++) {
+            Assert.assertNotNull(obj.get(i).getUserId());
+            Assert.assertNotNull(obj.get(i).getId());
+            Assert.assertNotNull(obj.get(i).getTitle());
+            Assert.assertNotNull(obj.get(i).getBody());
+        }
         Assert.assertEquals(obj.size(), posts);
     }
 
@@ -70,12 +75,14 @@ public class JsonTest {
         private String email;
         private String body;
     }
+
     @Data
     public static class AlbumClass {
         private Integer userId;
         private Integer id;
         private String title;
     }
+
     @Data
     public static class PhotoClass {
         private Integer albumId;

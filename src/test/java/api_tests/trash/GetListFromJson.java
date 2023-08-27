@@ -52,7 +52,7 @@ public class GetListFromJson {
                 .response().asString();
         ObjectMapper objectMapper = new ObjectMapper();
         List<Post> JsonPost = objectMapper.readValue(response, List.class);
-        System.out.println(JsonPost.size());
+        System.out.println(JsonPost.get(0).getBody());
      //   return JsonPost;
     }
 }
