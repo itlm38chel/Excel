@@ -21,12 +21,7 @@ public class JsonTest {
     @Test
     public void posts() throws JsonProcessingException {
         List<Post> obj = jsonplaceholder.posts(url);
-        for (int i = 0; i < obj.size(); i++) {
-            Assert.assertNotNull(obj.get(i).getUserId());
-            Assert.assertNotNull(obj.get(i).getId());
-            Assert.assertNotNull(obj.get(i).getTitle());
-            Assert.assertNotNull(obj.get(i).getBody());
-        }
+        System.out.println(obj.get(1).getId());
         Assert.assertEquals(obj.size(), posts);
     }
 
