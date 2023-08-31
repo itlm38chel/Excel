@@ -1,4 +1,4 @@
 /build/
 /.idea/
 /target/
-/test/resources/Prop.properties
+src/test/resources/Prop.properties
