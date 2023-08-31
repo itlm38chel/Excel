@@ -4,20 +4,28 @@ import com.codeborne.selenide.Configuration;
 import org.junit.Assert;
 import ui_tests.locators.LocatorsInventory;
 
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.util.Properties;
+
 import static com.codeborne.selenide.Selenide.open;
 
 public class ActionsInventory {
-    String starturl = "https://www.saucedemo.com/";
-    String user_name = "standard_user";
-    String pass = "secret_sauce";
-
+    FileInputStream fileInputStream;
+    Properties prop = new Properties();
+    String PATH_TO_PROPERTIES = "src/test/resources/Prop.properties";
     LocatorsInventory locatorsInventory = new LocatorsInventory();
 
-    public void login() {
-        //Входим в аккаунт
+    public void login() throws IOException {
+        fileInputStream = new FileInputStream(PATH_TO_PROPERTIES);
+        prop.load(fileInputStream);
+        String starturl = prop.getProperty("hostSauceDemo");
+        String user_name = prop.getProperty("userSauceDemo");
+        String pass = prop.getProperty("passSauceDemo");
+        System.out.println(starturl);
         Configuration.baseUrl = starturl;
         open(starturl);
-        locatorsInventory.Login(user_name, pass);
+         locatorsInventory.Login(user_name, pass);
     }
 
     public void invItemNumb() {
@@ -39,11 +47,12 @@ public class ActionsInventory {
             locatorsInventory.addItemToCart(name);
         }
     }
-    public void checkCart(){
+
+    public void checkCart() {
         //Проверка кол-ва товаров в корзине
         int count = locatorsInventory.checkCart();
-        int x=6;
-        Assert.assertEquals(x,count);
+        int x = 6;
+        Assert.assertEquals(x, count);
     }
 
 }

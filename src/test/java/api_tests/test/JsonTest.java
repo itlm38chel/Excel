@@ -5,11 +5,13 @@ import api_tests.pojo.Album;
 import api_tests.pojo.Comment;
 import api_tests.pojo.Photo;
 import api_tests.pojo.Post;
-import com.fasterxml.jackson.core.JsonProcessingException;
 import org.junit.Assert;
 import org.junit.Test;
 
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.util.List;
+import java.util.Properties;
 
 public class JsonTest {
 
@@ -17,11 +19,16 @@ public class JsonTest {
     int comments = 500;
     int albums = 100;
     int photos = 5000;
-    String url = "https://jsonplaceholder.typicode.com";
+    String PATH_TO_PROPERTIES = "src/test/resources/Prop.properties";
     JsonPlaceholder jsonplaceholder = new JsonPlaceholder();
+    FileInputStream fileInputStream;
+    Properties prop = new Properties();
 
     @Test
-    public void posts() throws JsonProcessingException, NoSuchFieldException {
+    public void posts() throws IOException {
+        fileInputStream = new FileInputStream(PATH_TO_PROPERTIES);
+        prop.load(fileInputStream);
+        String url = prop.getProperty("hostJsonPlaceHolder");
         List<Post> obj = jsonplaceholder.posts(url);
         for (int i = 0; i < obj.size(); i++) {
             Assert.assertNotNull(obj.get(i).getUserId());
@@ -33,7 +40,10 @@ public class JsonTest {
     }
 
     @Test
-    public void comments() throws JsonProcessingException {
+    public void comments() throws IOException {
+        fileInputStream = new FileInputStream(PATH_TO_PROPERTIES);
+        prop.load(fileInputStream);
+        String url = prop.getProperty("hostJsonPlaceHolder");
         List<Comment> obj = jsonplaceholder.comments(url);
         for (int i = 0; i < obj.size(); i++) {
             Assert.assertNotNull(obj.get(i).getPostId());
@@ -46,7 +56,10 @@ public class JsonTest {
     }
 
     @Test
-    public void albums() throws JsonProcessingException {
+    public void albums() throws IOException {
+        fileInputStream = new FileInputStream(PATH_TO_PROPERTIES);
+        prop.load(fileInputStream);
+        String url = prop.getProperty("hostJsonPlaceHolder");
         List<Album> obj = jsonplaceholder.albums(url);
         for (int i = 0; i < obj.size(); i++) {
             Assert.assertNotNull(obj.get(i).getUserId());
@@ -57,7 +70,10 @@ public class JsonTest {
     }
 
     @Test
-    public void photos() throws JsonProcessingException {
+    public void photos() throws IOException {
+        fileInputStream = new FileInputStream(PATH_TO_PROPERTIES);
+        prop.load(fileInputStream);
+        String url = prop.getProperty("hostJsonPlaceHolder");
         List<Photo> obj = jsonplaceholder.photos(url);
         for (int i = 0; i < obj.size(); i++) {
             Assert.assertNotNull(obj.get(i).getAlbumId());
